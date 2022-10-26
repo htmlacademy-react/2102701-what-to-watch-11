@@ -131,4 +131,5 @@ function WelcomeScreen({title, genre, date}: WelcomeScreenProps): JSX.Element {
   );
 }
 
+
 export default WelcomeScreen;
