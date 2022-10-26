@@ -1,4 +1,4 @@
-function WelcomeScreen(): JSX.Element {
+function MyListScreen(): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -18,7 +18,7 @@ function WelcomeScreen(): JSX.Element {
             </div>
           </li>
           <li className="user-block__item">
-            <a className="user-block__link">Sign out</a>
+            <a href="/" className="user-block__link">Sign out</a>
           </li>
         </ul>
       </header>
@@ -129,4 +129,4 @@ function WelcomeScreen(): JSX.Element {
   );
 }
 
-export default WelcomeScreen;
+export default MyListScreen;

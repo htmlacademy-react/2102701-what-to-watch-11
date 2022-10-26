@@ -1,4 +1,4 @@
-function WelcomeScreen(): JSX.Element {
+function PlayerScreen(): JSX.Element {
   return (
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
@@ -35,4 +35,4 @@ function WelcomeScreen(): JSX.Element {
   );
 }
 
-export default WelcomeScreen;
+export default PlayerScreen;
