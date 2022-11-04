@@ -1,13 +1,15 @@
-import OneFilmComponent from '../../components/one-film-component/one-film-component';
+import {Films} from '../../types/film';
+import FilmListComponent from '../../components/films-list/films-list';
+import {Link} from 'react-router-dom';
 
 type WelcomeScreenProps = {
   title: string;
   genre: string;
-  date: number;
+  date: string;
+  films: Films;
 }
 
-function WelcomeScreen({title, genre, date}: WelcomeScreenProps): JSX.Element {
-  const filmCardList = Array(20).fill(<OneFilmComponent/>);
+function WelcomeScreen({title, genre, date, films}: WelcomeScreenProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -17,11 +19,11 @@ function WelcomeScreen({title, genre, date}: WelcomeScreenProps): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
           <div className="logo">
-            <a href="/" className="logo__link">
+            <Link to="/" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
           <ul className="user-block">
             <li className="user-block__item">
@@ -30,7 +32,7 @@ function WelcomeScreen({title, genre, date}: WelcomeScreenProps): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <a href="/" className="user-block__link">Sign out</a>
+              <Link to="/" className="user-block__link">Sign out</Link>
             </li>
           </ul>
         </header>
@@ -105,7 +107,7 @@ function WelcomeScreen({title, genre, date}: WelcomeScreenProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {filmCardList}
+            <FilmListComponent films={films}/>
           </div>
 
           <div className="catalog__more">
@@ -115,11 +117,11 @@ function WelcomeScreen({title, genre, date}: WelcomeScreenProps): JSX.Element {
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="/" className="logo__link logo__link--light">
+            <Link to="/" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">

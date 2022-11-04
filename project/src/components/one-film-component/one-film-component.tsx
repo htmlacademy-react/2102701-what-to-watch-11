@@ -1,12 +1,21 @@
-function OneFilmComponent(): JSX.Element {
+import {Film} from '../../types/film';
+import {Link} from 'react-router-dom';
+
+type OneFilmComponentProps = {
+  film: Film;
+}
+
+function OneFilmComponent({film}: OneFilmComponentProps): JSX.Element {
   return (
     <article className="small-film-card catalog__films-card">
-      <div className="small-film-card__image">
-        <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
+      <div key={film.id}>
+        <div className="small-film-card__image">
+          <img src={film.posterSrc} alt={film.altTitle} width="280" height="175" />
+        </div>
+        <h3 className="small-film-card__title">
+          <Link to={`/films/${film.id}`} className="small-film-card__link">{film.title}</Link>
+        </h3>
       </div>
-      <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-      </h3>
     </article>
   );
 }
