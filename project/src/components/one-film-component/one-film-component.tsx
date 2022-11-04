@@ -13,7 +13,7 @@ function OneFilmComponent({film}: OneFilmComponentProps): JSX.Element {
           <img src={film.posterSrc} alt={film.altTitle} width="280" height="175" />
         </div>
         <h3 className="small-film-card__title">
-          <Link to="/films/:id" className="small-film-card__link">{film.title}</Link>
+          <Link to={`/films/${film.id}`} className="small-film-card__link">{film.title}</Link>
         </h3>
       </div>
     </article>

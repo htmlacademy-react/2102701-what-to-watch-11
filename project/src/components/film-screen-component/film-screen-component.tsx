@@ -7,7 +7,7 @@ type FilmScreenComponentProps = {
 
 function FilmScreenComponent({film}: FilmScreenComponentProps): JSX.Element {
   return (
-    <section className="film-card film-card--full">
+    <section key={film.id} className="film-card film-card--full">
       <div className="film-card__hero">
         <div className="film-card__bg">
           <img src={film.posterSrc} alt={film.altTitle}/>
@@ -58,7 +58,7 @@ function FilmScreenComponent({film}: FilmScreenComponentProps): JSX.Element {
                 <span>My list</span>
                 <span className="film-card__count">9</span>
               </button>
-              <Link to="/films/:id/review" className="btn film-card__button">Add review</Link>
+              <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
             </div>
           </div>
         </div>

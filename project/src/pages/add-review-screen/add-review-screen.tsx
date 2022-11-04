@@ -14,7 +14,6 @@ function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {
     }
     return false;
   });
-  console.log(Film)
   if(!Film) {
     return (
       <Navigate to='/'/>
