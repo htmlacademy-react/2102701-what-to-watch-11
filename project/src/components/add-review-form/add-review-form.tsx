@@ -5,11 +5,9 @@ function AddReviewForm(): JSX.Element {
     rating: 0,
     textArea: '',
   });
-  let tx = ''
-  const {rating, textArea} = state;
-  //onClick={() => {setState((prevState) => ({...prevState, rating: rating + 1, checked: true}))}}
 
-  console.log(state)
+  const {rating} = state;
+
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setState((prevState) => ({...prevState, textArea: event.target.value}));
   }
