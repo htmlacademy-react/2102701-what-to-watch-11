@@ -11,7 +11,7 @@ function OneFilmComponent({film}: OneFilmComponentProps): JSX.Element {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <article onMouseEnter={()=> setTimeout(() => {setIsPlaying(true)}, 5000)} onMouseLeave={()=> setIsPlaying(false)} className="small-film-card catalog__films-card">
+    <article onMouseEnter={()=> {setIsPlaying(true)}} onMouseLeave={()=> setIsPlaying(false)} className="small-film-card catalog__films-card">
       <div key={film.id}>
         <div className="small-film-card__image">
           {isPlaying? '' : <img src={film.posterSrc} alt={film.altTitle} width="280" height="175" />}

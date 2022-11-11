@@ -1,5 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 
+//let timer: ReturnType<typeof setTimeout> = setTimeout(() => { ... });
+
 type VideoPlayerProps = {
   autoPlay: boolean;
   src: string;
@@ -11,22 +13,26 @@ function VideoPlayer({autoPlay, src, poster}: VideoPlayerProps): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    let isVideoPlayerMounted = true;
+
+    const timeoutId: ReturnType<typeof setTimeout> = setTimeout(() => {
+      if (autoPlay) {
+        videoRef.current?.play();
+        return;
+      }}, 1000);
 
     if (videoRef.current === null) {
       return;
     }
 
-    if (autoPlay) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play();
-      return;
-    }
+
 
     videoRef.current.pause();
 
     return () => {
-      isVideoPlayerMounted = false;
+      if (videoRef.current !== null) {
+        videoRef.current.currentTime = 0;
+      }
+      clearTimeout(timeoutId)
     };
   }, [autoPlay]);
 
