@@ -1,6 +1,6 @@
 import {Film} from '../../types/film';
 import {Link} from 'react-router-dom';
-import AddReviewForm from '../add-review-form/add-review-form'
+import AddReviewForm from '../add-review-form/add-review-form';
 
 type AddReviewProps = {
   film: Film;
