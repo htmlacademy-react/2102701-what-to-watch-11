@@ -36,7 +36,7 @@ export const films: Films = [
     title: 'Bohemian Rhapsody',
     altTitle: 'Bohemian Rhapsody',
     videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    genre:  'Drama',
+    genre:  'Comedy',
     releaseDate: '2014',
     director: 'Wes Anderson',
     actors: [
@@ -65,7 +65,7 @@ export const films: Films = [
     title: 'Macbeth',
     altTitle: 'Macbeth',
     videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    genre:  'Drama',
+    genre:  'Action',
     releaseDate: '2014',
     director: 'Wes Anderson',
     actors: [
@@ -94,7 +94,7 @@ export const films: Films = [
     title: 'Aviator',
     altTitle: 'Aviator',
     videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    genre:  'Drama',
+    genre:  'History',
     releaseDate: '2014',
     director: 'Wes Anderson',
     actors: [
