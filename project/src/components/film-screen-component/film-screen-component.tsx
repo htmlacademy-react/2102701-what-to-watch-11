@@ -1,8 +1,8 @@
 import {Film, Films} from '../../types/film';
 import {Link} from 'react-router-dom';
-import FilmListComponent from '../films-list/films-list'
-import Tabs from '../tabs/tabs'
-import {Reviews} from '../../types/review'
+import FilmListComponent from '../films-list/films-list';
+import Tabs from '../tabs/tabs';
+import {Reviews} from '../../types/review';
 type FilmScreenComponentProps = {
   film: Film;
   similarFilms: Films;

@@ -7,6 +7,19 @@ export enum AppRoute {
   Player = '/player/:id'
 }
 
+export const GenresList = {
+  AllGenres: 'All Genres',
+  Comedy: 'Comedy',
+  Crime: 'Crime',
+  Documentary: 'Documentary',
+  Drama: 'Drama',
+  Horror: 'Horror',
+  KidsAndFamily: 'Kids & Family',
+  Romance: 'Romance',
+  SciFi: 'Sci-Fi',
+  Thriller: 'Thriller'
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
