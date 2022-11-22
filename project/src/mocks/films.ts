@@ -65,7 +65,7 @@ export const films: Films = [
     title: 'Macbeth',
     altTitle: 'Macbeth',
     videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    genre:  'Action',
+    genre:  'Crime',
     releaseDate: '2014',
     director: 'Wes Anderson',
     actors: [
@@ -94,7 +94,7 @@ export const films: Films = [
     title: 'Aviator',
     altTitle: 'Aviator',
     videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    genre:  'History',
+    genre:  'Documentary',
     releaseDate: '2014',
     director: 'Wes Anderson',
     actors: [
@@ -123,7 +123,7 @@ export const films: Films = [
     title: 'Johnny English',
     altTitle: 'Johnny English',
     videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    genre:  'Drama',
+    genre:  'Horror',
     releaseDate: '2014',
     director: 'Wes Anderson',
     actors: [
@@ -152,7 +152,7 @@ export const films: Films = [
     title: 'Midnight special',
     altTitle: 'Midnight special',
     videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    genre:  'Drama',
+    genre:  'Kids & Family',
     releaseDate: '2014',
     director: 'Wes Anderson',
     actors: [
@@ -181,7 +181,7 @@ export const films: Films = [
     title: 'Dardjeeling Limited',
     altTitle: 'Dardjeeling Limited',
     videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    genre:  'Drama',
+    genre:  'Romance',
     releaseDate: '2014',
     director: 'Wes Anderson',
     actors: [
@@ -209,7 +209,7 @@ export const films: Films = [
     title: 'Fantastic beasts the crimes of grindelwald',
     altTitle: 'Fantastic beasts the crimes of grindelwald',
     videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    genre:  'Drama',
+    genre:  'Sci-Fi',
     releaseDate: '2014',
     director: 'Wes Anderson',
     actors: [

@@ -1,5 +1,5 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, GenresList} from '../../const';
 import PrivateRouteComponent from '../private-route-component/private-route-component';
 import Error404Screen from '../../pages/error-404-screen/error-404-screen';
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
@@ -18,15 +18,16 @@ type AppScreenProps = {
   date: string;
   films: Films;
   reviews: Reviews;
+  genresList: typeof GenresList;
 }
 
-function App({title, genre, date, films, reviews}: AppScreenProps): JSX.Element {
+function App({title, genre, date, films, reviews, genresList}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Welcome}
-          element={<WelcomeScreen title={title} genre={genre} date={date} films={films}/>}
+          element={<WelcomeScreen genresList={genresList} title={title} date={date}/>}
         />
         <Route
           path={AppRoute.AddReview}

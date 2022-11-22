@@ -5,7 +5,7 @@ import { Reviews } from '../../types/review';
 
 type FilmScreenProps = {
   films: Films;
-  reviews: Reviews
+  reviews: Reviews;
 }
 
 function FilmScreen({films, reviews}: FilmScreenProps): JSX.Element {
@@ -23,7 +23,7 @@ function FilmScreen({films, reviews}: FilmScreenProps): JSX.Element {
     );
   }
   return (
-    <FilmScreenComponent film={activeFilm} reviews={reviews} similarFilms={films.filter(film => film.genre === activeFilm.genre )}/>
+    <FilmScreenComponent film={activeFilm} reviews={reviews} similarFilms={films.filter((film) => film.genre === activeFilm.genre )}/>
 
   );
 }
