@@ -1,11 +1,10 @@
 import {Link} from 'react-router-dom';
-import {GenresList} from '../../src/const'
-import {useState} from 'react';
+import {GenresList} from '../../src/const';
 import {useAppDispatch, useAppSelector} from '../hooks/index';
-import {switchToAllGenres, switchToComedies, switchToCrime, switchToDocumentary, switchToDramas, switchToHorror, switchToKidsAndFamily, switchToRomance, switchToSciFi, switchToThrillers} from '../store/actions'
+import {switchToAllGenres, switchToComedies, switchToCrime, switchToDocumentary, switchToDramas, switchToHorror, switchToKidsAndFamily, switchToRomance, switchToSciFi, switchToThrillers} from '../store/actions';
 
 type GenresListComponentProps = {
-  genresList: typeof GenresList
+  genresList: typeof GenresList;
 }
 
 function GenresListComponent({genresList}: GenresListComponentProps): JSX.Element {
@@ -14,12 +13,12 @@ function GenresListComponent({genresList}: GenresListComponentProps): JSX.Elemen
 
   return (
     <>
-    <span>{}</span>
+      <span>{}</span>
       <ul className="catalog__genres-list">
-        <li className={'catalog__genres-item ' + (stateGenre === 'All Genres' ? 'catalog__genres-item--active' : '')}>
-          <Link to='#' onClick = {() => dispatch(switchToAllGenres())}  className="catalog__genres-link">{genresList.AllGenres}</Link>
+        <li className={`catalog__genres-item ${ stateGenre === 'All Genres' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to='#' onClick = {() => dispatch(switchToAllGenres())} className="catalog__genres-link">{genresList.AllGenres}</Link>
         </li>
-        <li className={'catalog__genres-item ' + (stateGenre === 'Comedies' ? 'catalog__genres-item--active' : '')}>
+        <li className={`catalog__genres-item ${ stateGenre === 'Comedies' ? 'catalog__genres-item--active' : ''}`}>
           <Link to='#' onClick={() => dispatch(switchToComedies())} className="catalog__genres-link">{genresList.Comedy}</Link>
         </li>
         <li className="catalog__genres-item">
@@ -48,7 +47,7 @@ function GenresListComponent({genresList}: GenresListComponentProps): JSX.Elemen
         </li>
       </ul>
     </>
-  )
+  );
 }
 
 export default GenresListComponent;

@@ -10,4 +10,4 @@ export const switchToKidsAndFamily = createAction('kids & family');
 export const switchToRomance = createAction('romance');
 export const switchToSciFi = createAction('sci-fi');
 export const switchToThrillers = createAction('thrillers');
-
+export const getMoreFilms = createAction('getMoreFilms');

@@ -1,19 +1,24 @@
-import {Films} from '../../types/film';
 import FilmListComponent from '../../components/films-list/films-list';
 import {Link} from 'react-router-dom';
-import GenresListComponent from '../../components/genres-list-component'
+import GenresListComponent from '../../components/genres-list-component';
 import { GenresList } from '../../const';
-import { useAppSelector } from '../../hooks';
+import {useAppDispatch, useAppSelector } from '../../hooks';
+import ShowMoreButtonComponent from '../../components/show-more-button-component/show-more-button-component';
+import { getMoreFilms } from '../../store/actions';
+
 
 type WelcomeScreenProps = {
   title: string;
   date: string;
-  genresList: typeof GenresList
+  genresList: typeof GenresList;
 }
+
 
 function WelcomeScreen({title, date, genresList}: WelcomeScreenProps): JSX.Element {
   const genre = useAppSelector((state) => state.genre);
   const films = useAppSelector((state) => state.filmsList);
+  const filmsCount = useAppSelector((state) => state.filmsCount);
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -81,12 +86,10 @@ function WelcomeScreen({title, date, genresList}: WelcomeScreenProps): JSX.Eleme
           <GenresListComponent genresList={genresList}/>
 
           <div className="catalog__films-list">
-            <FilmListComponent films={films}/>
+            {films.length <= filmsCount ?
+              <FilmListComponent films={films}/> : <FilmListComponent films={films.slice(0, filmsCount)}/>}
           </div>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {films.length > filmsCount ? <ShowMoreButtonComponent onClick={() => dispatch(getMoreFilms())}/> : ''}
         </section>
 
         <footer className="page-footer">

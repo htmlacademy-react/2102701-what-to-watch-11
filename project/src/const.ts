@@ -18,7 +18,7 @@ export const GenresList = {
   Romance: 'Romance',
   SciFi: 'Sci-Fi',
   Thriller: 'Thriller'
-}
+};
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
