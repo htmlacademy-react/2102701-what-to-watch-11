@@ -231,6 +231,64 @@ export const films: Films = [
     ratingScore: 8.9,
     ratingLevel: 'Very good',
     ratingCount: 240
+  },
+  {
+    id: 9,
+    posterSrc: 'img/aviator.jpg',
+    title: 'Aviator',
+    altTitle: 'Aviator',
+    videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    genre:  'Documentary',
+    releaseDate: '2014',
+    director: 'Wes Anderson',
+    actors: [
+      'Bill Murray',
+      'Edward Norton',
+      'Jude Law',
+      'Willem Dafoe',
+      'Saoirse Ronan',
+      'Tony Revoloru',
+      'Tilda Swinton',
+      'Tom Wilkinson',
+      'Owen Wilkinson',
+      'Adrien Brody',
+      'Ralph Fiennes',
+      'Jeff Goldblum'
+    ],
+    runTime: '1h 39m',
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&aposs friend and protege. Gustave prides himself on providing first-class service to the hotel&aposs guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&aposs lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
+    ratingScore: 8.9,
+    ratingLevel: 'Very good',
+    ratingCount: 240
+  },
+  {
+    id: 10,
+    posterSrc: 'img/aviator.jpg',
+    title: 'Aviator',
+    altTitle: 'Aviator',
+    videoUrl: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    genre:  'Documentary',
+    releaseDate: '2014',
+    director: 'Wes Anderson',
+    actors: [
+      'Bill Murray',
+      'Edward Norton',
+      'Jude Law',
+      'Willem Dafoe',
+      'Saoirse Ronan',
+      'Tony Revoloru',
+      'Tilda Swinton',
+      'Tom Wilkinson',
+      'Owen Wilkinson',
+      'Adrien Brody',
+      'Ralph Fiennes',
+      'Jeff Goldblum'
+    ],
+    runTime: '1h 39m',
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&aposs friend and protege. Gustave prides himself on providing first-class service to the hotel&aposs guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&aposs lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
+    ratingScore: 8.9,
+    ratingLevel: 'Very good',
+    ratingCount: 240
   }
 ];
 

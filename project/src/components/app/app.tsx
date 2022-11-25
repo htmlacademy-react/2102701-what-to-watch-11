@@ -14,14 +14,13 @@ import {Reviews} from '../../types/review';
 
 type AppScreenProps = {
   title: string;
-  genre: string;
   date: string;
   films: Films;
   reviews: Reviews;
   genresList: typeof GenresList;
 }
 
-function App({title, genre, date, films, reviews, genresList}: AppScreenProps): JSX.Element {
+function App({title, date, films, reviews, genresList}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
