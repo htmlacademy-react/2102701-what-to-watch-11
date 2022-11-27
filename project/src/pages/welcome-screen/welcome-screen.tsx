@@ -1,25 +1,23 @@
 import FilmListComponent from '../../components/films-list/films-list';
 import {Link} from 'react-router-dom';
-import GenresListComponent from '../../components/genres-list-component';
+import GenresListComponent from '../../components/genres-list-component/genres-list-component';
 import { GenresList } from '../../const';
 import {useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMoreButtonComponent from '../../components/show-more-button-component/show-more-button-component';
-import { getMoreFilms } from '../../store/actions';
-
+import { showMoreFilms } from '../../store/actions';
+import { Films } from '../../types/film';
 
 type WelcomeScreenProps = {
-  title: string;
-  date: string;
-  genresList: typeof GenresList;
+  films: Films,
+  genresList: typeof GenresList,
 }
 
-
-function WelcomeScreen({title, date, genresList}: WelcomeScreenProps): JSX.Element {
+function WelcomeScreen({ genresList}: WelcomeScreenProps): JSX.Element {
   const genre = useAppSelector((state) => state.genre);
-  const films = useAppSelector((state) => state.filmsList);
   const filmsCount = useAppSelector((state) => state.filmsCount);
   const dispatch = useAppDispatch();
-
+  const films = useAppSelector((state) => state.filmsList);
+  const film = films[0];
   return (
     <>
       <section className="film-card">
@@ -54,10 +52,10 @@ function WelcomeScreen({title, date, genresList}: WelcomeScreenProps): JSX.Eleme
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{date}</span>
+                <span className="film-card__year">{film.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -89,7 +87,7 @@ function WelcomeScreen({title, date, genresList}: WelcomeScreenProps): JSX.Eleme
             {films.length <= filmsCount ?
               <FilmListComponent films={films}/> : <FilmListComponent films={films.slice(0, filmsCount)}/>}
           </div>
-          {films.length > filmsCount ? <ShowMoreButtonComponent onClick={() => dispatch(getMoreFilms())}/> : ''}
+          {films.length > filmsCount ? <ShowMoreButtonComponent onClick={() => dispatch(showMoreFilms([]))}/> : ''}
         </section>
 
         <footer className="page-footer">

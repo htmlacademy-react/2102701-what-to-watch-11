@@ -8,29 +8,33 @@ import FilmScreen from '../../pages/film-screen/film-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
-import {Films} from '../../types/film';
-import {Reviews} from '../../types/review';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import {useAppSelector} from '../../hooks';
+import { reviews } from '../../mocks/reviews';
 
 
-type AppScreenProps = {
-  title: string;
-  date: string;
-  films: Films;
-  reviews: Reviews;
-  genresList: typeof GenresList;
-}
 
-function App({title, date, films, reviews, genresList}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
+  const films = useAppSelector((state) => state.filmsList);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isFilmsDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Welcome}
-          element={<WelcomeScreen genresList={genresList} title={title} date={date}/>}
+          element={<WelcomeScreen films={films} genresList={GenresList}/>}
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReviewScreen films={films}/>}
+          element={<AddReviewScreen />}
         />
         <Route
           path={AppRoute.SignIn}
@@ -40,19 +44,19 @@ function App({title, date, films, reviews, genresList}: AppScreenProps): JSX.Ele
           path={AppRoute.MyList}
           element={
             <PrivateRouteComponent
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
-              <MyListScreen films={films}/>
+              <MyListScreen />
             </PrivateRouteComponent>
           }
         />
         <Route
           path={AppRoute.Film}
-          element={<FilmScreen films={films} reviews={reviews}/>}
+          element={<FilmScreen reviews={reviews}/>}
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerScreen films={films}/>}
+          element={<PlayerScreen />}
         />
         <Route
           path="*"

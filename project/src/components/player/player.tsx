@@ -7,7 +7,7 @@ type PlayerProps = {
 function Player ({film}: PlayerProps): JSX.Element {
   return (
     <div className="player">
-      <video src="#" className="player__video" poster={film.posterSrc}></video>
+      <video src="#" className="player__video" poster={film.posterImage}></video>
 
       <button type="button" className="player__exit">Exit</button>
 

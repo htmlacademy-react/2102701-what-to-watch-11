@@ -34,7 +34,7 @@ function Tabs({film, reviews}: TabsProps): JSX.Element {
           <p>{film.description}</p>
           <p className="film-card__director"><strong>Director: {film.director}</strong></p>
 
-          <p className="film-card__starring"><strong>Starring: {film.actors[0]} {film.actors[1]} {film.actors[2]} and other</strong></p>
+          <p className="film-card__starring"><strong>Starring: {film.starring} and other</strong></p>
         </div>
       )}
 
@@ -48,7 +48,7 @@ function Tabs({film, reviews}: TabsProps): JSX.Element {
             <p className="film-card__details-item">
               <strong className="film-card__details-name">Starring</strong>
               <span className="film-card__details-value">
-                {film.actors}
+                {film.starring}
               </span>
             </p>
           </div>
@@ -64,7 +64,7 @@ function Tabs({film, reviews}: TabsProps): JSX.Element {
             </p>
             <p className="film-card__details-item">
               <strong className="film-card__details-name">Released</strong>
-              <span className="film-card__details-value">{film.releaseDate}</span>
+              <span className="film-card__details-value">{film.released}</span>
             </p>
           </div>
         </div>

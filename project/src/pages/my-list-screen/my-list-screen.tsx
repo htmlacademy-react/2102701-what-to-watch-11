@@ -1,11 +1,10 @@
 import {Films} from '../../types/film';
 import FilmListComponent from '../../components/films-list/films-list';
 import {Link} from 'react-router-dom';
-type MyListScreenProps = {
-  films: Films;
-}
+import { useAppSelector } from '../../hooks';
 
-function MyListScreen({films}: MyListScreenProps): JSX.Element {
+function MyListScreen(): JSX.Element {
+  const films = useAppSelector((state) => state.filmsList);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
