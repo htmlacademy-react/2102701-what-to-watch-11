@@ -1,5 +1,4 @@
 import {Navigate, useParams} from 'react-router-dom';
-import { Films } from '../../types/film';
 import AddReview from '../../components/add-review/add-review';
 import { useAppSelector } from '../../hooks';
 

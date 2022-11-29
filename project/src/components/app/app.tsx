@@ -1,5 +1,5 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus, GenresList} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import PrivateRouteComponent from '../private-route-component/private-route-component';
 import Error404Screen from '../../pages/error-404-screen/error-404-screen';
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
@@ -11,7 +11,6 @@ import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {useAppSelector} from '../../hooks';
 import { reviews } from '../../mocks/reviews';
-
 
 
 function App(): JSX.Element {
@@ -30,7 +29,7 @@ function App(): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Welcome}
-          element={<WelcomeScreen films={films} genresList={GenresList}/>}
+          element={<WelcomeScreen films={films}/>}
         />
         <Route
           path={AppRoute.AddReview}

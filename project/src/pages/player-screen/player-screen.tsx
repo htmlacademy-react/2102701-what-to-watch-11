@@ -1,8 +1,6 @@
 import Player from '../../components/player/player';
 import {Navigate, useParams} from 'react-router-dom';
-import {Films} from '../../types/film';
 import { useAppSelector } from '../../hooks';
-
 
 
 function PlayerScreen(): JSX.Element {

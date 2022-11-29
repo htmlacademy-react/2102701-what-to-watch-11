@@ -1,4 +1,3 @@
-import { Films } from '../../types/film';
 import FilmScreenComponent from '../../components/film-screen-component/film-screen-component';
 import {Navigate, useParams} from 'react-router-dom';
 import { Reviews } from '../../types/review';

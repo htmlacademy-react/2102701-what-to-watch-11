@@ -1,4 +1,3 @@
-import {Films} from '../../types/film';
 import FilmListComponent from '../../components/films-list/films-list';
 import {Link} from 'react-router-dom';
 import { useAppSelector } from '../../hooks';

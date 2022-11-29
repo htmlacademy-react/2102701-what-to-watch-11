@@ -1,28 +1,31 @@
 import FilmListComponent from '../../components/films-list/films-list';
 import {Link} from 'react-router-dom';
 import GenresListComponent from '../../components/genres-list-component/genres-list-component';
-import { GenresList } from '../../const';
 import {useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMoreButtonComponent from '../../components/show-more-button-component/show-more-button-component';
 import { showMoreFilms } from '../../store/actions';
-import { Films } from '../../types/film';
+import {Films} from '../../types/film'
+import {useSelectGenres} from '../../store/selectors'
 
 type WelcomeScreenProps = {
   films: Films,
-  genresList: typeof GenresList,
 }
 
-function WelcomeScreen({ genresList}: WelcomeScreenProps): JSX.Element {
-  const genre = useAppSelector((state) => state.genre);
+function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
   const filmsCount = useAppSelector((state) => state.filmsCount);
+  const filmsGenre = useAppSelector((state) => state.genre)
   const dispatch = useAppDispatch();
-  const films = useAppSelector((state) => state.filmsList);
-  const film = films[0];
+  const genres = useSelectGenres();
+  const filteredFilms = filmsGenre === 'All Genres'
+  ? films.slice(0, filmsCount)
+  : films.filter((film) => film.genre === filmsGenre).slice(0, filmsCount);
+  const film = filteredFilms[0];
+
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={film.posterImage} alt={film.name} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
@@ -48,13 +51,13 @@ function WelcomeScreen({ genresList}: WelcomeScreenProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
               <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__genre">{film.genre}</span>
                 <span className="film-card__year">{film.released}</span>
               </p>
 
@@ -70,7 +73,7 @@ function WelcomeScreen({ genresList}: WelcomeScreenProps): JSX.Element {
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{films.length}</span>
                 </button>
               </div>
             </div>
@@ -81,13 +84,13 @@ function WelcomeScreen({ genresList}: WelcomeScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresListComponent genresList={genresList}/>
+          <GenresListComponent genres={genres}/>
 
           <div className="catalog__films-list">
             {films.length <= filmsCount ?
-              <FilmListComponent films={films}/> : <FilmListComponent films={films.slice(0, filmsCount)}/>}
+              <FilmListComponent films={films}/> : <FilmListComponent films={filteredFilms}/>}
           </div>
-          {films.length > filmsCount ? <ShowMoreButtonComponent onClick={() => dispatch(showMoreFilms([]))}/> : ''}
+          {filteredFilms.length >= filmsCount ? <ShowMoreButtonComponent onClick={() => dispatch(showMoreFilms())}/> : ''}
         </section>
 
         <footer className="page-footer">
