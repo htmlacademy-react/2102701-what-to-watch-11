@@ -1,70 +1,51 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { films } from '../mocks/films';
-import {getMoreFilms, switchToAllGenres, switchToComedies, switchToCrime, switchToDocumentary, switchToDramas, switchToHorror, switchToKidsAndFamily, switchToRomance, switchToSciFi, switchToThrillers} from './actions';
+import {switchToGenre, setFilmsDataLoadingStatus, setError, requireAuthorization, loadFilms, showMoreFilms, switchToAllGenres} from './actions';
+import {AuthorizationStatus} from '../const';
+import { Films } from '../types/film';
 
+type InitialState = {
+  genre: string;
+  filmsList: Films;
+  filmsCount: number;
+  authorizationStatus: AuthorizationStatus;
+  error: string | null;
+  isFilmsDataLoading: boolean;
+};
 
-const initialState = {
+const initialState: InitialState = {
   genre: 'All Genres',
-  filmsList: films,
-  filmsCount: 8
+  filmsList: [],
+  filmsCount: 8,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  error: null,
+  isFilmsDataLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(switchToAllGenres, (state) => {
+    .addCase(switchToAllGenres, (state, action) => {
       state.genre = 'All Genres';
-      state.filmsList = films;
       state.filmsCount = 8;
     })
-    .addCase(switchToComedies, (state) => {
-      state.genre = 'Comedies';
-      state.filmsList = films.filter((film) => film.genre === 'Comedy' );
+    .addCase(switchToGenre, (state, action) => {
+      state.genre = action.payload;
       state.filmsCount = 8;
     })
-    .addCase(switchToCrime, (state) => {
-      state.genre = 'Crime';
-      state.filmsList = films.filter((film) => film.genre === 'Crime' );
-      state.filmsCount = 8;
-    })
-    .addCase(switchToDramas, (state) => {
-      state.genre = 'Dramas';
-      state.filmsList = films.filter((film) => film.genre === 'Drama' );
-      state.filmsCount = 8;
-    })
-    .addCase(switchToDocumentary, (state) => {
-      state.genre = 'Documentary';
-      state.filmsList = films.filter((film) => film.genre === 'Documentary' );
-      state.filmsCount = 8;
-    })
-    .addCase(switchToHorror, (state) => {
-      state.genre = 'Horror';
-      state.filmsList = films.filter((film) => film.genre === 'Horror' );
-      state.filmsCount = 8;
-    })
-    .addCase(switchToKidsAndFamily, (state) => {
-      state.genre = 'Kids & Family';
-      state.filmsList = films.filter((film) => film.genre === 'Kids & Family' );
-      state.filmsCount = 8;
-    })
-    .addCase(switchToRomance, (state) => {
-      state.genre = 'Romance';
-      state.filmsList = films.filter((film) => film.genre === 'Romance' );
-      state.filmsCount = 8;
-    })
-    .addCase(switchToSciFi, (state) => {
-      state.genre = 'Sci-Fi';
-      state.filmsList = films.filter((film) => film.genre === 'Sci-fi' );
-      state.filmsCount = 8;
-    })
-    .addCase(switchToThrillers, (state) => {
-      state.genre = 'Thrillers';
-      state.filmsList = films.filter((film) => film.genre === 'Thriller' );
-      state.filmsCount = 8;
-    })
-    .addCase(getMoreFilms, (state) => {
+    .addCase(showMoreFilms, (state) => {
       state.filmsCount += 8;
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.filmsList = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(setFilmsDataLoadingStatus, (state, action) => {
+      state.isFilmsDataLoading = action.payload;
     });
-
 
 });
 

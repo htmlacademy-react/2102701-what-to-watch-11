@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import FilmListComponent from '../films-list/films-list';
 import Tabs from '../tabs/tabs';
 import {Reviews} from '../../types/review';
+
 type FilmScreenComponentProps = {
   film: Film;
   similarFilms: Films;
@@ -15,7 +16,7 @@ function FilmScreenComponent({film, similarFilms, reviews}: FilmScreenComponentP
       <section key={film.id} className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={film.posterSrc} alt={film.altTitle}/>
+            <img src={film.posterImage} alt={film.name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -43,10 +44,10 @@ function FilmScreenComponent({film, similarFilms, reviews}: FilmScreenComponentP
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.title}</h2>
+              <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{film.genre}</span>
-                <span className="film-card__year">{film.releaseDate}</span>
+                <span className="film-card__year">{film.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -72,7 +73,7 @@ function FilmScreenComponent({film, similarFilms, reviews}: FilmScreenComponentP
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={film.posterSrc} alt={film.altTitle} width="218" height="327" />
+              <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
             <Tabs film={film} reviews={reviews}/>
           </div>
