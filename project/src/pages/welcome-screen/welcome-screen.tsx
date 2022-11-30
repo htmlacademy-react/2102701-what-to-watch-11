@@ -4,21 +4,22 @@ import GenresListComponent from '../../components/genres-list-component/genres-l
 import {useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMoreButtonComponent from '../../components/show-more-button-component/show-more-button-component';
 import { showMoreFilms } from '../../store/actions';
-import {Films} from '../../types/film'
-import {useSelectGenres} from '../../store/selectors'
+import {Films} from '../../types/film';
+import {useSelectGenres} from '../../store/selectors';
+import {AppRoute} from '../../const';
 
 type WelcomeScreenProps = {
-  films: Films,
+  films: Films;
 }
 
 function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
   const filmsCount = useAppSelector((state) => state.filmsCount);
-  const filmsGenre = useAppSelector((state) => state.genre)
+  const filmsGenre = useAppSelector((state) => state.genre);
   const dispatch = useAppDispatch();
   const genres = useSelectGenres();
   const filteredFilms = filmsGenre === 'All Genres'
-  ? films.slice(0, filmsCount)
-  : films.filter((film) => film.genre === filmsGenre).slice(0, filmsCount);
+    ? films.slice(0, filmsCount)
+    : films.filter((film) => film.genre === filmsGenre).slice(0, filmsCount);
   const film = filteredFilms[0];
 
   return (
@@ -42,9 +43,9 @@ function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
                 <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
               </div>
             </li>
-            <li className="user-block__item">
-              <Link to="/" className="user-block__link">Sign out</Link>
-            </li>
+            <div className="user-block">
+              <Link to='/login' className="user-block__link">Sign in</Link>
+            </div>
           </ul>
         </header>
 
