@@ -55,7 +55,7 @@ function SignInScreen(): JSX.Element {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button onClick={() => navigate(AppRoute.Welcome)} className="sign-in__btn" type="submit">Sign in</button>
+            <button onSubmit={() => navigate(AppRoute.Welcome)} className="sign-in__btn" type="submit">Sign in</button>
           </div>
         </form>
       </div>

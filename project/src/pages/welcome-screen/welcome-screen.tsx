@@ -6,13 +6,16 @@ import ShowMoreButtonComponent from '../../components/show-more-button-component
 import { showMoreFilms } from '../../store/actions';
 import {Films} from '../../types/film';
 import {useSelectGenres} from '../../store/selectors';
-import {AppRoute} from '../../const';
+import SignInComponent from '../../components/sign-in-component/sign-in-component'
+import SignOutComponent from '../../components/sign-out-component/sign-out-component'
+import { AuthorizationStatus } from '../../const';
 
 type WelcomeScreenProps = {
   films: Films;
 }
 
 function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const filmsCount = useAppSelector((state) => state.filmsCount);
   const filmsGenre = useAppSelector((state) => state.genre);
   const dispatch = useAppDispatch();
@@ -26,7 +29,7 @@ function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={film.posterImage} alt={film.name} />
+          <img src={film.backgroundImage} alt={film.name} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
@@ -37,22 +40,13 @@ function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
               <span className="logo__letter logo__letter--3">W</span>
             </Link>
           </div>
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <div className="user-block">
-              <Link to='/login' className="user-block__link">Sign in</Link>
-            </div>
-          </ul>
+          {authorizationStatus === AuthorizationStatus.Auth ? <SignOutComponent/> : <SignInComponent/>  }
         </header>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={film.posterImage} alt={film.name} width="218" height="327" />
+              <img src={film.backgroundImage} alt={film.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
