@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import FilmListComponent from '../films-list/films-list';
 import Tabs from '../tabs/tabs';
 import {Reviews} from '../../types/review';
+import {useNavigate} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 type FilmScreenComponentProps = {
   film: Film;
@@ -11,6 +13,8 @@ type FilmScreenComponentProps = {
 }
 
 function FilmScreenComponent({film, similarFilms, reviews}: FilmScreenComponentProps): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <>
       <section key={film.id} className="film-card film-card--full">
@@ -37,7 +41,7 @@ function FilmScreenComponent({film, similarFilms, reviews}: FilmScreenComponentP
                 </div>
               </li>
               <li className="user-block__item">
-                <Link to="/" className="user-block__link">Sign out</Link>
+                <button onSubmit={() => navigate(AppRoute.Welcome)} className="sign-in__btn" type="submit">Sign in</button>
               </li>
             </ul>
           </header>

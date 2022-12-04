@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {switchToAllGenres, switchToGenre} from '../../store/actions';
 
 type GenresListComponentProps = {
-  genres: string[],
+  genres: string[];
 }
 
 function GenresListComponent({genres}: GenresListComponentProps): JSX.Element {
@@ -16,9 +16,10 @@ function GenresListComponent({genres}: GenresListComponentProps): JSX.Element {
       <li key={'All Genres'} className={`catalog__genres-item ${ stateGenre === 'All Genres' ? 'catalog__genres-item--active' : ''}`}>
         <Link to='#' onClick = {() => dispatch(switchToAllGenres())} className="catalog__genres-link">All Genres</Link>
       </li>
-      {genres.map((genre) => <li key={genre} className={`catalog__genres-item ${ stateGenre === genre ? 'catalog__genres-item--active' : ''}`}>
-        <Link to='#' onClick = {() => dispatch(switchToGenre(genre))} className="catalog__genres-link">{genre}</Link>
-      </li>)}
+      {genres.map((genre) =>
+        (<li key={genre} className={`catalog__genres-item ${ stateGenre === genre ? 'catalog__genres-item--active' : ''}`}>
+          <Link to='#' onClick = {() => dispatch(switchToGenre(genre))} className="catalog__genres-link">{genre}</Link>
+         </li>))}
     </ul>
   );
 }

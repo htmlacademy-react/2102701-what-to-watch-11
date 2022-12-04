@@ -1,4 +1,4 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import PrivateRouteComponent from '../private-route-component/private-route-component';
 import Error404Screen from '../../pages/error-404-screen/error-404-screen';
@@ -11,7 +11,8 @@ import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {useAppSelector} from '../../hooks';
 import { reviews } from '../../mocks/reviews';
-
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
@@ -25,7 +26,7 @@ function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Welcome}
@@ -62,7 +63,7 @@ function App(): JSX.Element {
           element={<Error404Screen />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

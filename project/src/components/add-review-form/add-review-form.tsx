@@ -17,10 +17,10 @@ function AddReviewForm(): JSX.Element {
       <div className="rating">
         <div className="rating__stars">
           <input onChange={() => {setState((prevState) => ({...prevState, rating: 10 }));}} className="rating__input" id="star-10" checked={rating === 10} type="radio" name="rating" value="10" />
-          <label className="rating__label" htmlFor="star-10">({rating})</label>
+          <label className="rating__label" htmlFor="star-10">Rating 10</label>
 
           <input onChange={() => {setState((prevState) => ({...prevState, rating: 9}));}} className="rating__input" id="star-9" checked={rating === 9} type="radio" name="rating" value="9" />
-          <label className="rating__label" htmlFor="star-9">({rating})</label>
+          <label className="rating__label" htmlFor="star-9">Rating 9</label>
 
           <input onChange={() => {setState((prevState) => ({...prevState, rating: 8}));}} className="rating__input" id="star-8" checked={rating === 8} type="radio" name="rating" value="8" />
           <label className="rating__label" htmlFor="star-8">Rating 8</label>
