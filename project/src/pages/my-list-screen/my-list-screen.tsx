@@ -6,7 +6,7 @@ import {logoutAction} from '../../store/api-actions';
 
 function MyListScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const films = useAppSelector((state) => state.filmsList);
+  const films = useAppSelector((state) => state.DATA.films);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

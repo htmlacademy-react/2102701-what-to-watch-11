@@ -9,6 +9,10 @@ export enum AppRoute {
   Player = '/player/:id'
 }
 
+export enum NameSpace {
+  Data = 'DATA',
+  User = 'USER',
+}
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',

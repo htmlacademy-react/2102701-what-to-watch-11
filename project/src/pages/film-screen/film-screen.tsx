@@ -8,7 +8,7 @@ type FilmScreenProps = {
 }
 
 function FilmScreen({reviews}: FilmScreenProps): JSX.Element {
-  const films = useAppSelector((state) => state.filmsList);
+  const films = useAppSelector((state) => state.DATA.films);
   const params = useParams();
   const activeFilm = films.find((film) => {
     if(film.id === Number(params.id)) {
