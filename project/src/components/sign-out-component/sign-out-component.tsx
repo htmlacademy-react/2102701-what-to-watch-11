@@ -1,9 +1,6 @@
 import {Link} from 'react-router-dom';
 import {logoutAction} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks';
-import {useNavigate} from 'react-router-dom';
-import {AppRoute} from '../../const';
-import {useRef, FormEvent} from 'react';
 
 function SignOutComponent(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,10 +13,20 @@ function SignOutComponent(): JSX.Element {
         </div>
       </li>
       <div className="user-block">
-        <Link to='/' onClick={() => dispatch(logoutAction())} className="user-block__link">Sign out</Link>
+        <Link
+          to='/'
+          onClick={
+            () => {
+              dispatch(logoutAction());
+            }
+          }
+          className="user-block__link"
+        >
+          Sign out
+        </Link>
       </div>
     </ul>
-  )
+  );
 }
 
 export default SignOutComponent;

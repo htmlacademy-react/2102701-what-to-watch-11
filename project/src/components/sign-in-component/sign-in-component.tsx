@@ -12,7 +12,7 @@ function SignInComponent(): JSX.Element {
         <Link to='/login' className="user-block__link">Sign in</Link>
       </div>
     </ul>
-  )
+  );
 }
 
 export default SignInComponent;

@@ -26,7 +26,17 @@ function MyListScreen(): JSX.Element {
             </div>
           </li>
           <li className="user-block__item">
-            <Link to='/' onClick={() => dispatch(logoutAction())} className="user-block__link">Sign out</Link>
+            <Link
+              to='/'
+              onClick={
+                () => {
+                  dispatch(logoutAction());
+                }
+              }
+              className="user-block__link"
+            >
+              Sign out
+            </Link>
           </li>
         </ul>
       </header>

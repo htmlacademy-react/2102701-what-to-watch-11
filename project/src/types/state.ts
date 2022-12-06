@@ -3,11 +3,11 @@ import {Films} from './film.js';
 import {AuthorizationStatus} from '../const.js';
 
 export type FilmsData = {
-  films: Films,
+  films: Films;
   isFilmsDataLoading: boolean;
-  filmsCount: number,
-  genres: string,
-  error: string | null,
+  filmsCount: number;
+  genres: string;
+  error: string | null;
 };
 
 export type UserProcess = {

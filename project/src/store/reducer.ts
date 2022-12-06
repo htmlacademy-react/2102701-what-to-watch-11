@@ -33,7 +33,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
-    })
+    });
 });
 
 export {reducer};
