@@ -6,7 +6,7 @@ export type FilmsData = {
   films: Films;
   isFilmsDataLoading: boolean;
   filmsCount: number;
-  genres: string;
+  genre: string;
   error: string | null;
 };
 

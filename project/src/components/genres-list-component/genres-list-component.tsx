@@ -8,7 +8,7 @@ type GenresListComponentProps = {
 }
 
 function GenresListComponent({genres}: GenresListComponentProps): JSX.Element {
-  const stateGenre = useAppSelector((state) => state.DATA.genres);
+  const stateGenre = useAppSelector((state) => state.DATA.genre);
   const dispatch = useAppDispatch();
 
   return (

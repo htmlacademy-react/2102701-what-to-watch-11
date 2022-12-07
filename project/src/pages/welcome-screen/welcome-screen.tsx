@@ -17,7 +17,7 @@ type WelcomeScreenProps = {
 function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
   const filmsCount = useAppSelector((state) => state.DATA.filmsCount);
-  const filmsGenre = useAppSelector((state) => state.DATA.genres);
+  const filmsGenre = useAppSelector((state) => state.DATA.genre);
   const dispatch = useAppDispatch();
   const genres = useSelectGenres();
   const filteredFilms = filmsGenre === 'All Genres'

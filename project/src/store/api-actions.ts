@@ -2,12 +2,11 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state';
 import {Films} from '../types/film';
-import {setError, redirectToRoute} from './actions';
+import {setError, redirectToRoute, switchToGenre} from './actions';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, TIMEOUT_SHOW_ERROR, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {store} from './';
 
 export const fetchFilmsAction = createAsyncThunk<Films, undefined, {
   dispatch: AppDispatch;
@@ -15,7 +14,7 @@ export const fetchFilmsAction = createAsyncThunk<Films, undefined, {
   extra: AxiosInstance;
 }>(
   'data/fetchFilms',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Films>(APIRoute.Films);
     return data;
   },
@@ -27,7 +26,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.get(APIRoute.Login);
   },
 );
@@ -51,7 +50,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
   },
@@ -59,10 +58,11 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 
 export const clearErrorAction = createAsyncThunk(
   'clearError',
-  () => {
+  async (_arg, {dispatch}) => {
     setTimeout(
-      () => store.dispatch(setError(null)),
+      () => dispatch(setError(null)),
       TIMEOUT_SHOW_ERROR,
     );
   },
 );
+
