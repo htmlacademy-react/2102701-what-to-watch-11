@@ -6,7 +6,7 @@ import {logoutAction} from '../../store/api-actions';
 
 function MyListScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const films = useAppSelector((state) => state.filmsList);
+  const films = useAppSelector((state) => state.DATA.films);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -26,7 +26,17 @@ function MyListScreen(): JSX.Element {
             </div>
           </li>
           <li className="user-block__item">
-            <Link to='/' onClick={() => dispatch(logoutAction())} className="user-block__link">Sign out</Link>
+            <Link
+              to='/'
+              onClick={
+                () => {
+                  dispatch(logoutAction());
+                }
+              }
+              className="user-block__link"
+            >
+              Sign out
+            </Link>
           </li>
         </ul>
       </header>

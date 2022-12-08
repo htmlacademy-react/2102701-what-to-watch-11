@@ -17,13 +17,13 @@ function Tabs({film, reviews}: TabsProps): JSX.Element {
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          <li className={activeTab === 'Overview' ? "film-nav__item film-nav__item--active" : "film-nav__item"}>
+          <li className={activeTab === 'Overview' ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}>
             <Link onClick={() => setActiveTab('Overview')} to="#Overview" className="film-nav__link">Overview</Link>
           </li>
-          <li className={activeTab === 'Details'? "film-nav__item film-nav__item--active" : "film-nav__item"}>
+          <li className={activeTab === 'Details' ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}>
             <Link onClick={() => setActiveTab('Details')} to="#Details" className="film-nav__link">Details</Link>
           </li>
-          <li className={activeTab === 'Reviews'? "film-nav__item film-nav__item--active" : "film-nav__item"}>
+          <li className={activeTab === 'Reviews' ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}>
             <Link onClick={() => setActiveTab('Reviews')} to="#Reviews" className="film-nav__link">Reviews</Link>
           </li>
         </ul>

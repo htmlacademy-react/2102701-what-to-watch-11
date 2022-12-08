@@ -8,7 +8,7 @@ type GenresListComponentProps = {
 }
 
 function GenresListComponent({genres}: GenresListComponentProps): JSX.Element {
-  const stateGenre = useAppSelector((state) => state.genre);
+  const stateGenre = useAppSelector((state) => state.DATA.genre);
   const dispatch = useAppDispatch();
 
   return (
@@ -17,9 +17,12 @@ function GenresListComponent({genres}: GenresListComponentProps): JSX.Element {
         <Link to='#' onClick = {() => dispatch(switchToAllGenres())} className="catalog__genres-link">All Genres</Link>
       </li>
       {genres.map((genre) =>
-        (<li key={genre} className={`catalog__genres-item ${ stateGenre === genre ? 'catalog__genres-item--active' : ''}`}>
-          <Link to='#' onClick = {() => dispatch(switchToGenre(genre))} className="catalog__genres-link">{genre}</Link>
-         </li>))}
+        (
+          <li key={genre} className={`catalog__genres-item ${ stateGenre === genre ? 'catalog__genres-item--active' : ''}`}>
+            <Link to='#' onClick = {() => dispatch(switchToGenre(genre))} className="catalog__genres-link">{genre}</Link>
+          </li>
+        )
+      )}
     </ul>
   );
 }

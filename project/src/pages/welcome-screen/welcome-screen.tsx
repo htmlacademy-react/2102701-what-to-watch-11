@@ -6,8 +6,8 @@ import ShowMoreButtonComponent from '../../components/show-more-button-component
 import { showMoreFilms } from '../../store/actions';
 import {Films} from '../../types/film';
 import {useSelectGenres} from '../../store/selectors';
-import SignInComponent from '../../components/sign-in-component/sign-in-component'
-import SignOutComponent from '../../components/sign-out-component/sign-out-component'
+import SignInComponent from '../../components/sign-in-component/sign-in-component';
+import SignOutComponent from '../../components/sign-out-component/sign-out-component';
 import { AuthorizationStatus } from '../../const';
 
 type WelcomeScreenProps = {
@@ -15,9 +15,9 @@ type WelcomeScreenProps = {
 }
 
 function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const filmsCount = useAppSelector((state) => state.filmsCount);
-  const filmsGenre = useAppSelector((state) => state.genre);
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+  const filmsCount = useAppSelector((state) => state.DATA.filmsCount);
+  const filmsGenre = useAppSelector((state) => state.DATA.genre);
   const dispatch = useAppDispatch();
   const genres = useSelectGenres();
   const filteredFilms = filmsGenre === 'All Genres'
@@ -40,7 +40,7 @@ function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
               <span className="logo__letter logo__letter--3">W</span>
             </Link>
           </div>
-          {authorizationStatus === AuthorizationStatus.Auth ? <SignOutComponent/> : <SignInComponent/>  }
+          {authorizationStatus === AuthorizationStatus.Auth ? <SignOutComponent/> : <SignInComponent/> }
         </header>
 
         <div className="film-card__wrap">

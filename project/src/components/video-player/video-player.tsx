@@ -11,23 +11,23 @@ function VideoPlayer({autoPlay, src, poster}: VideoPlayerProps): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-
+    const videoElement = videoRef.current;
     const timeoutId: ReturnType<typeof setTimeout> = setTimeout(() => {
       if (autoPlay) {
-        videoRef.current?.play();
+        videoElement?.play();
 
       }}, 1000);
 
-    if (videoRef.current === null) {
+    if (videoElement === null) {
       return;
     }
 
 
-    videoRef.current.pause();
+    videoElement.pause();
 
     return () => {
-      if (videoRef.current !== null) {
-        videoRef.current.currentTime = 0;
+      if (videoElement !== null) {
+        videoElement.currentTime = 0;
       }
       clearTimeout(timeoutId);
     };

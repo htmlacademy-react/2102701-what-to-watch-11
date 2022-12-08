@@ -1,5 +1,5 @@
 import {Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import PrivateRouteComponent from '../private-route-component/private-route-component';
 import Error404Screen from '../../pages/error-404-screen/error-404-screen';
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
@@ -13,13 +13,16 @@ import {useAppSelector} from '../../hooks';
 import { reviews } from '../../mocks/reviews';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import {getAuthorizationStatus, getAuthCheckedStatus} from '../../store/user-process/selectors';
+import {getFilmsDataLoadingStatus} from '../../store/film-data/selectors';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
-  const films = useAppSelector((state) => state.filmsList);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isFilmsDataLoading = useAppSelector(getFilmsDataLoadingStatus);
+  const films = useAppSelector((state) => state.DATA.films);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isFilmsDataLoading) {
+  if (!isAuthChecked || isFilmsDataLoading) {
     return (
       <LoadingScreen />
     );
