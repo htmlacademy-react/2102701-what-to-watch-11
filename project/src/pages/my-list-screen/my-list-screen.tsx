@@ -2,11 +2,17 @@ import FilmListComponent from '../../components/films-list/films-list';
 import {Link} from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import {useAppDispatch} from '../../hooks';
-import {logoutAction} from '../../store/api-actions';
+import {fetchFavoritesAction, logoutAction} from '../../store/api-actions';
+import { useEffect } from 'react';
 
 function MyListScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const films = useAppSelector((state) => state.DATA.films);
+  const films = useAppSelector((state) => state.DATA.filmsFavorites);
+
+  useEffect(() => {
+    dispatch(fetchFavoritesAction());
+  }, [dispatch]);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

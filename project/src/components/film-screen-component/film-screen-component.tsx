@@ -4,7 +4,14 @@ import FilmListComponent from '../films-list/films-list';
 import Tabs from '../tabs/tabs';
 import {Reviews} from '../../types/review';
 import {useNavigate} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import { AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import SignOutComponent from '../sign-out-component/sign-out-component';
+import SignInComponent from '../sign-in-component/sign-in-component';
+import { favoritesAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { useSelectFavoritesCount } from '../../store/selectors';
+import { fetchReviewsAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
 type FilmScreenComponentProps = {
   film: Film;
@@ -14,6 +21,17 @@ type FilmScreenComponentProps = {
 
 function FilmScreenComponent({film, similarFilms, reviews}: FilmScreenComponentProps): JSX.Element {
   const navigate = useNavigate();
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+  const favoritesCount = useSelectFavoritesCount();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchReviewsAction({filmId: film.id}));
+  }, [film.id, dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchSimilarFilmsAction({filmId: film.id}));
+  }, [film.id, dispatch]);
 
   return (
     <>
@@ -36,12 +54,7 @@ function FilmScreenComponent({film, similarFilms, reviews}: FilmScreenComponentP
 
             <ul className="user-block">
               <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <button onSubmit={() => navigate(AppRoute.Welcome)} className="sign-in__btn" type="submit">Sign in</button>
+                {authorizationStatus === AuthorizationStatus.Auth ? <SignOutComponent/> : <SignInComponent/> }
               </li>
             </ul>
           </header>
@@ -55,20 +68,36 @@ function FilmScreenComponent({film, similarFilms, reviews}: FilmScreenComponentP
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button onClick={() => navigate(`/player/${film.id}`)} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
-                <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
+                {authorizationStatus !== AuthorizationStatus.Auth
+                  ?
+                  ''
+                  :
+                  <button
+                    onClick={() => {dispatch(favoritesAction({filmId: film.id, status: !film.isFavorite}));}}
+                    className="btn btn--list film-card__button"
+                    type="button"
+                  >
+                    {!film.isFavorite
+                      ?
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#add"></use>
+                      </svg>
+                      :
+                      <svg viewBox="0 0 18 14" width="18" height="14">
+                        <use xlinkHref="#in-list"></use>
+                      </svg>}
+                    <span>My list</span>
+                    <span className="film-card__count">{favoritesCount}</span>
+                  </button>}
+                {authorizationStatus === AuthorizationStatus.Auth ?
+                  <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link> :
+                  ''}
               </div>
             </div>
           </div>

@@ -4,17 +4,21 @@ import GenresListComponent from '../../components/genres-list-component/genres-l
 import {useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMoreButtonComponent from '../../components/show-more-button-component/show-more-button-component';
 import { showMoreFilms } from '../../store/actions';
-import {Films} from '../../types/film';
-import {useSelectGenres} from '../../store/selectors';
+import {Films, Film} from '../../types/film';
+import {useSelectGenres, useSelectFavoritesCount} from '../../store/selectors';
 import SignInComponent from '../../components/sign-in-component/sign-in-component';
 import SignOutComponent from '../../components/sign-out-component/sign-out-component';
 import { AuthorizationStatus } from '../../const';
+import {useNavigate} from 'react-router-dom';
+import { favoritesAction } from '../../store/api-actions';
 
 type WelcomeScreenProps = {
   films: Films;
+  promoFilm: Film;
 }
 
-function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
+function WelcomeScreen({films, promoFilm}: WelcomeScreenProps): JSX.Element {
+  const navigate = useNavigate();
   const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
   const filmsCount = useAppSelector((state) => state.DATA.filmsCount);
   const filmsGenre = useAppSelector((state) => state.DATA.genre);
@@ -23,7 +27,8 @@ function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
   const filteredFilms = filmsGenre === 'All Genres'
     ? films.slice(0, filmsCount)
     : films.filter((film) => film.genre === filmsGenre).slice(0, filmsCount);
-  const film = filteredFilms[0];
+  const film = promoFilm;
+  const favoritesCount = useSelectFavoritesCount();
 
   return (
     <>
@@ -57,19 +62,35 @@ function WelcomeScreen({films}: WelcomeScreenProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button onClick={() => navigate(`/player/${film.id}`)} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">{films.length}</span>
-                </button>
+                {authorizationStatus !== AuthorizationStatus.Auth
+                  ? ''
+                  : (
+                    <button
+                      onClick={() => {dispatch(favoritesAction({filmId: film.id, status: !film.isFavorite}));}}
+                      className="btn btn--list film-card__button"
+                      type="button"
+                    >
+                      {!film.isFavorite
+                        ? (
+                          <svg viewBox="0 0 19 20" width="19" height="20">
+                            <use xlinkHref="#add"></use>
+                          </svg>
+                        )
+                        : (
+                          <svg viewBox="0 0 18 14" width="18" height="14">
+                            <use xlinkHref="#in-list"></use>
+                          </svg>
+                        )}
+                      <span>My list</span>
+                      <span className="film-card__count">{favoritesCount}</span>
+                    </button>
+                  )}
               </div>
             </div>
           </div>

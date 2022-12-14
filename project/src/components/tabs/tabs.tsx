@@ -3,6 +3,7 @@ import {useState} from 'react';
 import {Film} from '../../types/film';
 import {Reviews} from '../../types/review';
 
+
 type TabsProps = {
   film: Film;
   reviews: Reviews;
@@ -11,6 +12,34 @@ type TabsProps = {
 
 function Tabs({film, reviews}: TabsProps): JSX.Element {
   const [activeTab, setActiveTab] = useState<'Overview' | 'Details' | 'Reviews'>('Overview');
+  function getTimeFromMins(mins: number) {
+    const hours = Math.trunc(mins / 60);
+    const minutes = mins % 60;
+    return `${hours }h ${ minutes }m`;
+  }
+
+  let ratingText = '';
+
+  if(film.rating >= 0 && film.rating <= 3) {
+    ratingText = 'Bad';
+  }
+
+  if(film.rating > 3 && film.rating <= 5) {
+    ratingText = 'Normal';
+  }
+
+  if(film.rating > 5 && film.rating <= 8) {
+    ratingText = 'Good';
+  }
+
+  if(film.rating > 8 && film.rating <= 10) {
+    ratingText = 'Very good';
+  }
+
+  if(film.rating === 10) {
+    ratingText = 'Awesome';
+  }
+
   return (
 
 
@@ -24,17 +53,22 @@ function Tabs({film, reviews}: TabsProps): JSX.Element {
             <Link onClick={() => setActiveTab('Details')} to="#Details" className="film-nav__link">Details</Link>
           </li>
           <li className={activeTab === 'Reviews' ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}>
-            <Link onClick={() => setActiveTab('Reviews')} to="#Reviews" className="film-nav__link">Reviews</Link>
+            <Link onClick={() => {setActiveTab('Reviews');}} to="#Reviews" className="film-nav__link">Reviews</Link>
           </li>
         </ul>
       </nav>
-
       {activeTab === 'Overview' && (
         <div className="film-card__text">
+          <div className="film-rating">
+            <div className="film-rating__score">{film.rating}</div>
+            <p className="film-rating__meta">
+              <span className="film-rating__level">{ratingText}</span>
+              <span className="film-rating__count">{film.scoresCount} ratings</span>
+            </p>
+          </div>
           <p>{film.description}</p>
           <p className="film-card__director"><strong>Director: {film.director}</strong></p>
-
-          <p className="film-card__starring"><strong>Starring: {film.starring} and other</strong></p>
+          <p className="film-card__starring"><strong>Starring: {film.starring.join(', ')} and other</strong></p>
         </div>
       )}
 
@@ -48,7 +82,7 @@ function Tabs({film, reviews}: TabsProps): JSX.Element {
             <p className="film-card__details-item">
               <strong className="film-card__details-name">Starring</strong>
               <span className="film-card__details-value">
-                {film.starring}
+                {film.starring.join(', ')}
               </span>
             </p>
           </div>
@@ -56,7 +90,7 @@ function Tabs({film, reviews}: TabsProps): JSX.Element {
           <div className="film-card__text-col">
             <p className="film-card__details-item">
               <strong className="film-card__details-name">Run Time</strong>
-              <span className="film-card__details-value">{film.runTime}</span>
+              <span className="film-card__details-value">{getTimeFromMins(film.runTime)}</span>
             </p>
             <p className="film-card__details-item">
               <strong className="film-card__details-name">Genre</strong>
@@ -72,84 +106,19 @@ function Tabs({film, reviews}: TabsProps): JSX.Element {
       {activeTab === 'Reviews' && (
         <div className="film-card__reviews film-card__row">
           <div className="film-card__reviews-col">
-            <div className="review">
-              <blockquote className="review__quote">
-                <p className="review__text">{reviews[0].text}</p>
+            {reviews.map((review) => (
+              <div key={review.id} className="review">
+                <blockquote className="review__quote">
+                  <p className="review__text">{review.comment}</p>
+                  <footer className="review__details">
+                    <cite className="review__author">{review.user.name}</cite>
+                    <time className="review__date" dateTime={new Date(review.date).toLocaleDateString('en-US')}>{new Date(review.date).toDateString()}</time>
+                  </footer>
+                </blockquote>
 
-                <footer className="review__details">
-                  <cite className="review__author">{reviews[0].author}</cite>
-                  <time className="review__date" dateTime="2016-12-24">{reviews[0].reviewDate}</time>
-                </footer>
-              </blockquote>
-
-              <div className="review__rating">{reviews[0].reviewRating}</div>
-            </div>
-
-            <div className="review">
-              <blockquote className="review__quote">
-                <p className="review__text">{reviews[1].text}</p>
-
-                <footer className="review__details">
-                  <cite className="review__author">{reviews[1].author}</cite>
-                  <time className="review__date" dateTime="2015-11-18">{reviews[1].reviewDate}</time>
-                </footer>
-              </blockquote>
-
-              <div className="review__rating">{reviews[1].reviewRating}</div>
-            </div>
-
-            <div className="review">
-              <blockquote className="review__quote">
-                <p className="review__text">{reviews[2].text}</p>
-
-                <footer className="review__details">
-                  <cite className="review__author">{reviews[2].author}</cite>
-                  <time className="review__date" dateTime="2015-11-18">{reviews[2].reviewDate}</time>
-                </footer>
-              </blockquote>
-
-              <div className="review__rating">{reviews[2].reviewRating}</div>
-            </div>
-          </div>
-          <div className="film-card__reviews-col">
-            <div className="review">
-              <blockquote className="review__quote">
-                <p className="review__text">The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.</p>
-
-                <footer className="review__details">
-                  <cite className="review__author">Matthew Lickona</cite>
-                  <time className="review__date" dateTime="2016-12-20">December 20, 2016</time>
-                </footer>
-              </blockquote>
-
-              <div className="review__rating">7,2</div>
-            </div>
-
-            <div className="review">
-              <blockquote className="review__quote">
-                <p className="review__text">It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.</p>
-
-                <footer className="review__details">
-                  <cite className="review__author">Paula Fleri-Soler</cite>
-                  <time className="review__date" dateTime="2016-12-20">December 20, 2016</time>
-                </footer>
-              </blockquote>
-
-              <div className="review__rating">7,6</div>
-            </div>
-
-            <div className="review">
-              <blockquote className="review__quote">
-                <p className="review__text">It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.</p>
-
-                <footer className="review__details">
-                  <cite className="review__author">Paula Fleri-Soler</cite>
-                  <time className="review__date" dateTime="2016-12-20">December 20, 2016</time>
-                </footer>
-              </blockquote>
-
-              <div className="review__rating">7,0</div>
-            </div>
+                <div className="review__rating">{review.rating}</div>
+              </div>
+            ))}
           </div>
         </div>
       )}
