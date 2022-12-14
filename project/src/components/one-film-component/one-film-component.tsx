@@ -15,7 +15,7 @@ function OneFilmComponent({film}: OneFilmComponentProps): JSX.Element {
       <div key={film.id}>
         <div className="small-film-card__image">
           {isPlaying ? '' : <img src={film.posterImage} alt={film.name} width="280" height="175"/>}
-          <VideoPlayer src={film.videoLink} poster={film.previewVideoLink} autoPlay={isPlaying}/>
+          <VideoPlayer src={film.previewVideoLink} poster={film.previewImage} autoPlay={isPlaying}/>
         </div>
 
         <h3 className="small-film-card__title">

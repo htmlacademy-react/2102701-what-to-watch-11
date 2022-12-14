@@ -1,12 +1,19 @@
 import {Film} from '../../types/film';
 import {Link} from 'react-router-dom';
 import AddReviewForm from '../add-review-form/add-review-form';
+import { AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
+import SignInComponent from '../../components/sign-in-component/sign-in-component';
+import SignOutComponent from '../../components/sign-out-component/sign-out-component';
+
 
 type AddReviewProps = {
   film: Film;
 }
 
 function AddReview ({film}: AddReviewProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -37,14 +44,7 @@ function AddReview ({film}: AddReviewProps): JSX.Element {
           </nav>
 
           <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to="/" className="user-block__link">Sign out</Link>
-            </li>
+            {authorizationStatus === AuthorizationStatus.Auth ? <SignOutComponent/> : <SignInComponent/> }
           </ul>
         </header>
 
@@ -54,7 +54,7 @@ function AddReview ({film}: AddReviewProps): JSX.Element {
       </div>
 
       <div className="add-review">
-        <AddReviewForm/>
+        <AddReviewForm filmId={film.id}/>
       </div>
 
     </section>

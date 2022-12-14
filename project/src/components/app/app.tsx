@@ -10,19 +10,19 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {useAppSelector} from '../../hooks';
-import { reviews } from '../../mocks/reviews';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import {getAuthorizationStatus, getAuthCheckedStatus} from '../../store/user-process/selectors';
 import {getFilmsDataLoadingStatus} from '../../store/film-data/selectors';
+import { useSelectPromoFilm } from '../../store/selectors';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const isFilmsDataLoading = useAppSelector(getFilmsDataLoadingStatus);
   const films = useAppSelector((state) => state.DATA.films);
-
-  if (!isAuthChecked || isFilmsDataLoading) {
+  const promoFilm = useSelectPromoFilm();
+  if (!isAuthChecked || isFilmsDataLoading || promoFilm === undefined) {
     return (
       <LoadingScreen />
     );
@@ -33,11 +33,17 @@ function App(): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Welcome}
-          element={<WelcomeScreen films={films}/>}
+          element={<WelcomeScreen promoFilm={promoFilm} films={films}/>}
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReviewScreen />}
+          element={
+            <PrivateRouteComponent
+              authorizationStatus={authorizationStatus}
+            >
+              <AddReviewScreen />
+            </PrivateRouteComponent>
+          }
         />
         <Route
           path={AppRoute.SignIn}
@@ -55,7 +61,7 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.Film}
-          element={<FilmScreen reviews={reviews}/>}
+          element={<FilmScreen />}
         />
         <Route
           path={AppRoute.Player}

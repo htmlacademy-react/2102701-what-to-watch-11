@@ -1,14 +1,12 @@
 import FilmScreenComponent from '../../components/film-screen-component/film-screen-component';
-import {Navigate, useParams} from 'react-router-dom';
-import { Reviews } from '../../types/review';
+import { useParams} from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
+import Error404Screen from '../error-404-screen/error-404-screen';
 
-type FilmScreenProps = {
-  reviews: Reviews;
-}
 
-function FilmScreen({reviews}: FilmScreenProps): JSX.Element {
+function FilmScreen(): JSX.Element {
   const films = useAppSelector((state) => state.DATA.films);
+  const reviews = useAppSelector((state) => state.DATA.reviews);
   const params = useParams();
   const activeFilm = films.find((film) => {
     if(film.id === Number(params.id)) {
@@ -16,14 +14,17 @@ function FilmScreen({reviews}: FilmScreenProps): JSX.Element {
     }
     return false;
   });
+
   if(!activeFilm) {
     return (
-      <Navigate to='/'/>
+      <Error404Screen/>
 
     );
   }
+
+
   return (
-    <FilmScreenComponent film={activeFilm} reviews={reviews} similarFilms={films.filter((film) => film.genre === activeFilm.genre )}/>
+    <FilmScreenComponent film={activeFilm} reviews={reviews} similarFilms={films.filter((film) => film.genre === activeFilm.genre).slice(0, 4)}/>
 
   );
 }
