@@ -29,3 +29,8 @@ export enum APIRoute {
   Promo = '/promo',
   SimilarFilms = '/films'
 }
+
+export enum CommentLength {
+  min = 50,
+  max = 400
+}

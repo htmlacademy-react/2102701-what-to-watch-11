@@ -10,7 +10,7 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {useAppSelector} from '../../hooks';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-route/history-router';
 import browserHistory from '../../browser-history';
 import {getAuthorizationStatus, getAuthCheckedStatus} from '../../store/user-process/selectors';
 import {getFilmsDataLoadingStatus} from '../../store/film-data/selectors';

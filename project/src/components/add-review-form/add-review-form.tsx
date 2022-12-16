@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../hooks';
 import {FormEvent} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
+import {CommentLength} from '../../const';
 
 type AddReviewFormProps = {
   filmId: number;
@@ -85,7 +86,7 @@ function AddReviewForm({filmId}: AddReviewFormProps): JSX.Element {
       </div>
 
       <div className="add-review__text">
-        <textarea ref={textAreaRef} required disabled={isLoading} minLength={50} maxLength={400} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+        <textarea ref={textAreaRef} required disabled={isLoading} minLength={CommentLength.min} maxLength={CommentLength.max} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
         <div className="add-review__submit">
           <button className="add-review__btn" type="submit">Post</button>
         </div>
