@@ -11,7 +11,6 @@ type AddReviewFormProps = {
   filmId: number;
 }
 
-
 function AddReviewForm({filmId}: AddReviewFormProps): JSX.Element {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
